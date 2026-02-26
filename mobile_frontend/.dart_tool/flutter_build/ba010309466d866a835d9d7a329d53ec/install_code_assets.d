@@ -1,0 +1,1 @@
+ /home/kavia/workspace/code-generation/gourmet-discover-and-delivery-240066-240075/mobile_frontend/.dart_tool/flutter_build/ba010309466d866a835d9d7a329d53ec/native_assets.json: 

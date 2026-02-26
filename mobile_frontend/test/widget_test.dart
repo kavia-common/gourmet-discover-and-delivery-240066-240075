@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile_frontend/main.dart';
+import 'package:mobile_frontend/services/local_storage_service.dart';
+import 'package:mobile_frontend/state/app_state.dart';
 
 void main() {
-  testWidgets('App generation message displayed', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+  testWidgets('App renders shell with Home tab', (WidgetTester tester) async {
+    final storage = await LocalStorageService.create();
+    final state = await AppState.create(storage);
 
-    expect(find.text('mobile_frontend App is being generated...'), findsOneWidget);
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
+    await tester.pumpWidget(MyApp(appState: state));
+    await tester.pumpAndSettle();
 
-  testWidgets('App bar has correct title', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-
-    expect(find.text('mobile_frontend'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Search'), findsOneWidget);
+    expect(find.text('Orders'), findsOneWidget);
+    expect(find.text('Account'), findsOneWidget);
   });
 }
